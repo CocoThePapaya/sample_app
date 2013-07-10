@@ -1,0 +1,1 @@
+Running through the sample application for Ruby on Rails. Hopefully this goes better than last time!
