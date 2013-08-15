@@ -34,6 +34,13 @@ module SessionsHelper
 		redirect_to(session[:retur_to] || default)
 		clear_return_to
 	end
+	
+	def signed_in_user
+		unless signed_in?
+			store_location
+			redirect_to signin_url, notice: "Please sign in."
+		end
+	end
 
 	private
 	
@@ -53,4 +60,12 @@ module SessionsHelper
 			session[:return_tp] = nil
 		end
 		
+		def authenticate
+			deny_access unless signed_in?
+		end	
+		
+		def deny_access
+			store_location
+			redirect_to signin_path, :notice => "Please sign in to access this page."
+		end
 end
